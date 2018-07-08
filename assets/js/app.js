@@ -1,20 +1,17 @@
+$( document ).ready(function() {
+    // An array of animals, new animals will be pushed into this array;
+    var action = ["salamander", "lizard", "spider", "goat", "antelope"];
+    // Function that displays all gif buttons
+    function displayGifButtons(){
+        $("#gifButtonsTop").empty(); // erasing anything in this div id so that it doesnt duplicate the results
+        for (var i = 0; i < actions.length; i++){
+            var gifButton = $("<button>");
+            gifButton.addClass("action");
+            gifButton.addClass("btn btn-primary")
+            gifButton.attr("data-name", actions[i]);
+            gifButton.text(actions[i]);
+            $("#gifButtonsTop").append(gifButton);
+        }
+    }
 
 
-function getData(){
-
-    var input = $("#searchtext").val()
-   
-var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=vTb6bHwpy4GwJ4V6zSgx8GI6eVmDhMEp&limit=10");
-
-xhr.done(function(response) {
-
-     console.log("success got data", response); 
-
-var jiffs = response.data
-
-for (i in jiffs)
-{
-     $('.inner').append("<img src='"+jiffs[i].images.original.url+"' style='height:350px; width:350px;'/>")
-}
-    });
-}
