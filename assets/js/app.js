@@ -1,17 +1,17 @@
-$( document ).ready(function() {
-    // An array of animals, new animals will be pushed into this array;
-    var action = ["salamander", "lizard", "spider", "goat", "antelope"];
-    // Function that displays all gif buttons
-    function displayGifButtons(){
-        $("#gifButtonsTop").empty(); // erasing anything in this div id so that it doesnt duplicate the results
-        for (var i = 0; i < actions.length; i++){
-            var gifButton = $("<button>");
-            gifButton.addClass("action");
-            gifButton.addClass("btn btn-primary")
-            gifButton.attr("data-name", actions[i]);
-            gifButton.text(actions[i]);
-            $("#gifButtonsTop").append(gifButton);
+$("button").click(function(){
+
+    var searchQ = $("#searchQ")[0].value.split(" ").join("+");
+
+    var myRequest = $.get("http://api.giphy.com/v1/gifs/search?q=" + searchQ +"&api_key=vTb6bHwpy4GwJ4V6zSgx8GI6eVmDhMEp&limit=10");
+    myRequest.done(function(data) { console.log("success got data", data); });
+
+    myRequest.done(
+        function(data) {
+            for(var i = 0; i < data.data.length; i++) {
+                var newImg = document.createElement("img");
+                newImg.src = data.data[i].images.original.url;
+                document.body.appendChild(newImg);
+            }
         }
-    }
-
-
+    )
+})
